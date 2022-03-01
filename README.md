@@ -1,4 +1,4 @@
-# Software Engineering - Project - MyNeigh
+# Software Engineering Project - MyNeigh
 
 This repository contains the Project from __Software Engineering__ (SE) course taken in 2019. 
 Mainly, it contains the process of creation (theoretically) of our application (i.e., MyNeigh)
@@ -21,7 +21,7 @@ The project was devided in 4 sprints:
 
 ## Repository Content
 
-The repository contains the main [documents]() and [presentations]() of the project, the [UML]() files with the Use case, class and sequence diagrams. 
+The repository contains the main [documents](https://github.com/AinaMontalban/SE-BDBI/tree/main/Documents/PDFs) and [presentations](https://github.com/AinaMontalban/SE-BDBI/tree/main/Presentations) of the project, the [UML](https://github.com/AinaMontalban/SE-BDBI/tree/main/UML) files with the Use case, class and sequence diagrams. 
 
 
 
