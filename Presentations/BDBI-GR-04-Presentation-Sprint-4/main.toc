@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Team}{4}{0}{1}
+\beamer@sectionintoc {2}{Trello}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Trello Tasks}{5}{0}{2}
+\beamer@sectionintoc {3}{Bitbucket}{7}{0}{3}
+\beamer@sectionintoc {4}{Test Cases}{8}{0}{4}
+\beamer@subsectionintoc {4}{1}{Add event to calendar}{8}{0}{4}
+\beamer@subsectionintoc {4}{2}{Manage notifications}{9}{0}{4}
+\beamer@subsectionintoc {4}{3}{User management}{10}{0}{4}
+\beamer@sectionintoc {5}{Burndown Chart}{11}{0}{5}
+\beamer@subsectionintoc {5}{1}{Burndown table}{11}{0}{5}
+\beamer@subsectionintoc {5}{2}{Burndown chart}{12}{0}{5}
+\beamer@sectionintoc {6}{Conclusions}{13}{0}{6}

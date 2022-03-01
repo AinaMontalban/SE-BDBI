@@ -1,0 +1,92 @@
+@startuml
+actor User
+boundary Interface
+control AdminSystem
+entity WarningsList
+entity Warning
+entity Notification
+entity Neighbour
+
+User -> Interface: AddWarning()
+Interface -> AdminSystem: Addwarning()
+activate AdminSystem
+deactivate Interface
+loop While fields incomplete
+AdminSystem -> Interface: requestDetails()
+activate AdminSystem
+activate Interface
+User -> Interface: AddDate()
+User -> Interface: AddStatus()
+User -> Interface: AddDescription()
+User -> Interface: AddAuthor()
+Interface -> AdminSystem: <<return>> processedData(Date, Time, Description, Author)
+deactivate Interface
+end
+AdminSystem -> AdminSystem: checkValidData()
+group Not Valid Data
+AdminSystem -> Interface: NotValidData()
+Interface -> Interface: showMessage("Not valid Data")
+end
+
+group Valid Data
+    WarningsList -> AdminSystem: <<return>> AcceptedData(Date, Time, Description)
+    AdminSystem -> WarningsList: Attach_Warning()
+    activate WarningsList
+    WarningsList -> Warning: AttachInformation()
+    activate Warning
+    Warning --> WarningsList:  SuccesfulAttachment()
+    deactivate Warning
+    WarningsList --> AdminSystem: SuccesfulAttachment()
+    deactivate WarningsList
+end
+    AdminSystem -> Notification: Create
+    activate Notification
+    Notification -> AdminSystem: NewInstance
+    deactivate Notification 
+    AdminSystem -> AdminSystem: sendNotification()
+    AdminSystem -> Neighbour: ReceiveNotification()
+    Neighbour --> AdminSystem: <<return>> NotificationResponse
+    AdminSystem -> Interface: showMessage("Warning Notification")
+
+
+alt Accepted Notification
+User -> Interface: ClickAcceptNotification()
+activate Interface
+Interface -> AdminSystem: AcceptNotification()
+AdminSystem -> Interface: <<return>> Information
+group if Modify Status
+User -> Interface: ClickSelectStatus()
+Interface -> AdminSystem: SelectStatus()
+note left
+	Pending
+	In progress
+	Solved
+end note
+AdminSystem -> Interface: <<return>> StatusOptions
+AdminSystem -> AdminSystem: CheckValidStatus()
+AdminSystem -> Warning: AddNewStatus()
+activate Warning
+Warning ->AdminSystem: <<return>> StatusAdded()
+deactivate Warning
+end
+
+else Rejected Notification
+User -> Interface: ClickRejectNotification()
+Interface -> AdminSystem: RejectNotification()
+AdminSystem -> Interface: <<return>> DeletedNotifcation()
+else Remember Later
+User -> Interface: ClickRememberLater()
+Interface -> AdminSystem: RememberLater()
+AdminSystem -> Interface: requestWaitTime()
+User -> Interface: ClickSelectWaitTime()
+Interface -> AdminSystem:  <<return>> requestWaitTime()
+deactivate Interface
+note left
+5 minutes
+1 hour
+1 day
+end note
+    AdminSystem -> AdminSystem: Wait(Time)
+    AdminSystem -> AdminSystem: sendNotification()
+end
+@enduml

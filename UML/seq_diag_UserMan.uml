@@ -1,0 +1,56 @@
+@startuml
+actor AppAdmin
+boundary Interface
+control AdminSystem
+entity Users
+entity NA
+database DB
+
+AppAdmin -> Interface: CLickUsers()
+activate Interface
+Interface -> AdminSystem: SelectUsers()
+activate AdminSystem
+AdminSystem -> Users: getInfo()
+activate Users
+Users -> AdminSystem: <<return>> Users List
+AdminSystem -> Interface: <<return>> Users Lists
+deactivate Users
+
+AppAdmin -> Interface: SearchUser(UserName)
+Interface -> AdminSystem: SearchUser()
+AdminSystem -> Interface: requestDetails
+
+AppAdmin -> Interface: AddUserName
+Interface -> AdminSystem: <<return>> requestDetails()
+AdminSystem -> AdminSystem: Check Valid UserName
+
+AdminSystem -> Users: retreiveUserID()
+activate Users
+Users -> AdminSystem: <<return>> UserID
+
+AdminSystem -> Interface : <<return>> UserID
+AppAdmin -> Interface: RemoveUser(UserID)
+Interface -> AdminSystem: RemoveUser()
+AdminSystem -> Users: getInfo(ID)
+deactivate AdminSystem
+
+activate NA
+Users -> NA: retreiveNAlist()
+NA -> Users: <<return>> NA List
+loop for NAs in NAList
+Users -> NA: DeleteUserinNA(ID, NA)
+Users <- NA: DeletedUserfromNA
+deactivate NA
+end
+
+activate AdminSystem
+Users -> AdminSystem: <<return>> UserSelected
+deactivate Users
+AdminSystem -> DB: RemoveUser(ID)
+activate DB
+DB -> AdminSystem: <<return>> UserDeleted
+AdminSystem -> Interface: UserDeleted()
+deactivate DB
+deactivate AdminSystem
+Interface -> Interface: showMessage("User Deleted")
+@enduml

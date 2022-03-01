@@ -1,0 +1,10 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Team Members}{3}{0}{1}
+\beamer@sectionintoc {2}{Project}{4}{0}{2}
+\beamer@sectionintoc {3}{Trello}{5}{0}{3}
+\beamer@subsectionintoc {3}{1}{Trello Tasks}{5}{0}{3}
+\beamer@sectionintoc {4}{Bitbucket}{8}{0}{4}
+\beamer@sectionintoc {5}{Requeriments}{9}{0}{5}
+\beamer@subsectionintoc {5}{1}{Functional}{9}{0}{5}
+\beamer@subsectionintoc {5}{2}{Non Functional}{13}{0}{5}
+\beamer@sectionintoc {6}{Conclusions}{14}{0}{6}

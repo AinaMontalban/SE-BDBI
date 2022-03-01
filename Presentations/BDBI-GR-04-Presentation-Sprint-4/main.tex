@@ -1,0 +1,125 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit} % new
+
+\usepackage[utf8]{inputenc}
+\documentclass{beamer}
+\usepackage{beamerthemesplit} % new
+
+\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\newcommand{\roundpic}[4][]{
+  \tikz\node [circle, minimum width = #2,
+    path picture = {
+      \node [#1] at (path picture bounding box.center) {
+        \includegraphics[width=#3]{#4}};
+    }] {};}
+
+\usepackage{graphicx,wrapfig,lipsum}
+\usepackage{multicol}
+
+\usepackage{tcolorbox}
+
+\begin{document}
+\begin{center}
+    \includegraphics[scale=0.28]{imatges/org.png}
+\end{center}
+
+\title{MY-NEIGH}
+\author{BDBI\_2019\_GR\_04}
+\date{\today}
+
+\frame{\titlepage}
+
+\frame{\frametitle{Table of contents}\tableofcontents}
+
+
+\section{Team}
+\frame{\frametitle{Team members}
+  \begin{itemize}
+    \item MARTA IBÁÑEZ 
+    \item JUDIT CAMPS   
+    \item AINA MONTALBAN 
+  \end{itemize}
+  \vspace{1cm}
+  \hspace{2cm}
+ \roundpic[xshift=-0.03cm,yshift=-0.03cm]{2cm}{2cm}{imatges/marta.png}
+   \hspace{0.5cm}
+ \roundpic[xshift=-0.03cm,yshift=-0.03cm]{2cm}{2cm}{imatges/judit.JPG}
+    \hspace{0.5cm}
+  \roundpic[xshift=-0.03cm,yshift=-0.03cm]{2cm}{2cm}{imatges/aina.JPG}
+}
+
+
+\section{Trello}
+\subsection{Trello Tasks}
+\frame{\frametitle{Plan}
+\begin{center}
+    \includegraphics[scale=0.17]{imatges/trello.png}
+\end{center}
+}
+
+\frame{\frametitle{Done}
+\begin{center}
+    \includegraphics[scale=0.3]{imatges/done.png}
+
+\end{center}
+}
+
+\section{Bitbucket}
+\frame{\frametitle{Bitbucket}
+\includegraphics[scale=0.26]{imatges/bitbucket.png}
+
+}
+
+\section{Test Cases}
+\subsection{Add event to calendar}
+\frame{\frametitle{Test Cases}
+
+
+
+
+}
+
+
+\subsection{Manage notifications}
+\frame{\frametitle{Test Cases}
+
+
+
+}
+
+\subsection{User management}
+\frame{\frametitle{Test Cases}
+
+
+
+
+}
+
+
+\section{Burndown Chart}
+\subsection{Burndown table}
+\frame{\frametitle{Progress}
+\includegraphics[width=\textwidth]{imatges/burndown.png}
+
+}
+
+\subsection{Burndown chart}
+\frame{\frametitle{Progress}}
+
+
+
+
+
+\section{Conclusions}
+\frame{\frametitle{Conclusions}
+\begin{itemize}
+    \item Bad time estimation
+    \item Not complicated as expected
+    \item Again: bad organization (external work)
+\end{itemize}
+}
+
+\end{document}

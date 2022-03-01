@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+
+:Neighbour: <|--- :President:
+:Property Administrator:
+:App Admin: 
+
+rectangle SYSTEM{
+:Neighbour: -> (Manage Profile)
+:Neighbour: -> (Enter NA/Password)
+:Neighbour: -> (Add meeting to calendar)
+(Add meeting to calendar) ..> (Add information about the meeting) : <<include>>
+:Neighbour: --> (Add warning)
+(Add warning) ..> (Add warning status) : <<include>>
+:Neighbour: --> (Send message)
+(Send message) ..> (Attach files) : <<include>>
+:Neighbour: -> (Modify Settings)
+:Neighbour: -> (View Contacts)
+:Neighbour: -> (Manage notifications)
+(Manage notifications) ..> (Accept) : <<include>>
+(Manage notifications) ..> (Reject) : <<include>>
+
+:President: --> (Manage budgets)
+(Manage budgets) ..> (Accept budget) : <<include>>
+(Manage budgets) ..> (Reject budget) : <<include>>
+(Manage budgets) ..> (Download budget) : <<include>>
+:President: --> (Manage invoices)
+(Manage invoices) ..> (Accept invoice) : <<include>>
+(Manage invoices) ..> (Reject invoice) : <<include>>
+(Manage invoices) ..> (Download invoice) : <<include>>
+:President: --> (Sign Electronically)
+
+
+:Property Administrator: --> (Add NA)
+:Property Administrator: --> (Assign President)
+(Assign President) ..> (Change President) : <<extend>>
+:Property Administrator: --> (Manage notifications)
+
+:Property Administrator: --> (Manage Profile)
+:Property Administrator: --> (Add meeting to calendar)
+(Send budget) --> (Upload budget) : <<include>>
+(Send invoice) ..> (Upload invoice) : <<include>>
+:Property Administrator: --> (Payment)
+
+:Neighbour: --> (Register)
+:Property Administrator: --> (Register)
+
+:Neighbour: --> (Login)
+:Property Administrator: --> (Login)
+
+:Neighbour: --> (Logout)
+:Property Administrator: --> (Logout)
+
+rectangle DB {
+:App Admin: --> (Manage Users)
+(Manage Users) ..> (Delete Users): <<include>>
+(Manage Users) ..> (Edit Users): <<include>>
+(Manage Users) ..> (Search Users): <<include>>
+:App Admin: --> (Manage Content)
+(Manage Content) ..> (Delete Content): <<include>>
+:App Admin: --> (Maintain the System)
+(Maintain the System) ..> (System Report): <<extend>>
+}
+}
+@enduml

@@ -1,0 +1,237 @@
+@startuml
+class AdminSystem{
+newEnrollmentNA(Username, NA)
+deleteEnrollmentNA()
+}
+
+class NotificationManagement{
+SendNotification()
+AcceptNotification()
+RejectNotification()
+RememberLater()
+}
+
+
+
+class User {
+#userId: string
+- password: string 
+- loginStatus: string
+- registerDate: date
+#verifyLogin(): bool
+-recoverPassword(): string and int
+}
+
+class Neighbour{
+#Name: string
+#Username: string 
+#PhoneNumber: int
+#Email: string 
+#ListNA: Vector
+Register()
+Logout()
+Login()
+EditProfile()
+GetUsername(): String
+GetPhoneNumber(): Integers
+GetNAList(): vector
+SelectNaList(val): string
+}
+note left of Neighbour
+When a neighbour adds a NA, 
+it introduces a digit password
+end note
+class PropertyAdministrator{
+Name: string
+Username: string 
+PhoneNumber: int
+Email: string 
+ListNA: vector
+Company: string
+Register()
+Logout()
+Login()
+EditProfile()
+GetCompany()
+GetNaList()
+CreateNA()
+AssignPresident()
+ChangePresident()
+
+}
+
+class President{
+DateStart: date
+DateEnd: date
+}
+
+class NA{
+Name: string
+Password: int
+Address: string
+Password: int
+Floors: int
+DoorsPerFloor: int
+getName()
+getAddress()
+getFloors()
+getDoorsPerFloor()
+}
+
+class WarningManagement {
+ListWarnings: vector
+SearchWarning()
+FilterByDate()
+FilterByAuthor()
+AddWarning()
+RemoveWarning()
+}
+
+class Warning {
+Name: string
+Status: string
+Author: string
+Date: date
+Place: string
+GetName()
+GetData()
+GetAuthor()
+GetStatus()
+AddName()
+AddDate()
+AddDescription()
+AddAuthor()
+AddStatus()
+}
+
+enum WarningStatus{
+Pending
+In progress
+Solved
+}
+
+
+class ChatController{
+Chat
+User
+GetChat()
+SetChat()
+GetMessage()
+SetMessage()
+GetSender()
+SetSender()
+GetReceiver()
+SetReceiver()
+}
+
+class Chat {
+ChatID: int
+SenderID: int
+ReceiverID: int
+Message: string
+DateTime: date
+Chat()
+GetChat()
+SetChatID()
+GetSenderID()
+SetSenderID()
+GetRecreiver()
+SetReceiver()
+GetMessage()
+SetMessage()
+GetDateTime()
+AttachFile()
+}
+
+class CalendarManagement{
+}
+class Calendar{
+Date
+Day
+Month
+Year
+DaysOfWeek
+DaysInMonth
+TypeOfView()
+LoadMeeting()
+CreateMeeting()
+ListEvent()
+RemoveEvent()
+}
+enum CalendarViewType{
+By Day
+By Month
+BY Year
+}
+
+
+
+class Event{
+Day: date
+Hour: int
+Place: string
+DaysOrderList: vector
+DisplayInfo()
+}
+
+
+
+class Invoice{
+InvoiceID: int
+Name: string
+Date: date
+Document: pdf
+uploadPDF()
+removePDF()
+}
+
+class Budget{
+BudgetID: int
+Name: string
+Date: date
+Document: pdf
+uploadPDF()
+removePDF()
+}
+
+class Payment{
+PaymentID: int
+Amount: int
+RecieverID: int
+ConfirmPayment()
+CancelPayment()
+}
+
+class AccountNA{
+TotalAmount: float
+AccountID: string
+NAName: string
+getAmount()
+getPayments()
+}
+
+class Message{
+Information
+}
+
+
+User ^-- Neighbour
+User ^-- PropertyAdministrator
+Neighbour ^-- President
+
+PropertyAdministrator "1" -- "1..n" NA: has >
+Neighbour "n" -- "1..n" NA: has > 
+Warning .> WarningStatus: uses >
+Calendar ..> CalendarViewType
+NA "1" *-- "1" Warning: contains >
+NA *-- Chat: contains > 
+NA "1" *-- "1" Calendar: contains > 
+Calendar "1" --> "1..n" Event: uses > 
+NA "1" *-- "1..n" Contacts: has > 
+Contacts o- Suppliers
+NA "1" *-- "1" AccountNA: has > 
+AccountNA -- Payment
+Invoice "1..n" --o "1" NA 
+Budget "1..n" --o "1" NA
+Message --* Chat
+@enduml

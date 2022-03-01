@@ -1,0 +1,61 @@
+@startuml
+actor User
+boundary Interface
+control CalendarManager
+entity Calendar
+entity Event
+entity Notification
+entity Neighbour
+
+User -> Interface: ClickCalendar()
+Interface -> CalendarManager: SelectCalendar()
+activate CalendarManager
+CalendarManager -> Calendar: getInfo()
+activate Calendar
+Calendar -> CalendarManager: <<return>> someInfo()
+deactivate Calendar
+CalendarManager -> Interface: <<return>> AbletoAddMeeting
+activate Interface
+User -> Interface: CreateMeeting()
+Interface -> CalendarManager: CreateMeeting()
+deactivate Interface
+deactivate CalendarManager
+loop While fields incomplete
+CalendarManager -> Interface: requestDetails()
+activate CalendarManager
+activate Interface
+User -> Interface: AddDate()
+User -> Interface: AddTime()
+User -> Interface: AddDescription()
+Interface -> CalendarManager: <<return>> processedData(Date, Time, Description)
+deactivate Interface
+end
+CalendarManager -> CalendarManager: checkValidData()
+group Not Valid Data
+CalendarManager -> Interface: NotValidData()
+activate Interface
+Interface -> Interface: showMessage("Not valid Data")
+end
+
+group Valid Data
+    CalendarManager -> Calendar: Attach_Meeting()
+    activate Calendar
+    Calendar -> Event: AttachInformation()
+    activate Event
+    Event --> Calendar:  <<return>> SuccesfulAttachment()
+    deactivate Event
+    Calendar --> CalendarManager:  <<return>> SuccesfulAttachment()
+    deactivate Calendar
+end
+
+    CalendarManager -> Notification: Create
+activate Notification
+    Notification -> CalendarManager: NewInstance 
+    deactivate Notification
+    CalendarManager -> CalendarManager: sendNotification()
+    activate Neighbour
+    CalendarManager -> Neighbour: ReceiveNotification()
+    Neighbour --> CalendarManager: <<return>> NotificationResponse
+    deactivate Neighbour
+deactivate CalendarManager
+@enduml
